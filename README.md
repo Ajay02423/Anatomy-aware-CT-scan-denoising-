@@ -107,7 +107,7 @@ Models are tested across 4 dose levels:
 
 ## 🚀 Training Pipeline
 
-### Stage 1: Teacher Network Training
+### Model Training
 
 The teacher network is trained on normal-dose CT (NDCT) images:
 
@@ -117,21 +117,12 @@ python Baseline/training_baseline.py \
     --epochs_teacher 100 \
     --batch 8 \
     --lr 2e-4
-```
-
-### Stage 2: Student Network Training
-
-The student encoder learns from the teacher's latent space:
-
-```python
-python Baseline/training_baseline.py \
-    --mayo_root /path/to/data \
     --epochs_student 150 \
     --lam_lat 1.0 \
     --lam_rec 1.0
 ```
 
----
+
 
 ## 📥 Installation
 
@@ -219,7 +210,7 @@ Sample outputs are saved in each model folder:
 
 ## 📚 Model Training Details
 
-### Encoder Architecture
+### Baseline Encoder Architecture
 ```
 ┌─────────────────────────────────────┐
 │ Input (1, H, W)                     │
@@ -233,7 +224,7 @@ Sample outputs are saved in each model folder:
          ↓ Latent Space
 ```
 
-### Decoder Architecture
+### Baseline Decoder Architecture
 ```
 ┌─────────────────────────────────────┐
 │ Latent (512, h, w)                  │
@@ -262,12 +253,12 @@ Sample outputs are saved in each model folder:
 ```bash
 # Evaluate Baseline model
 python Baseline/evaluate_baseline.py \
-    --model_path runs/final/teacher/teacher_Ec.pt \
+    --model_path runs/final/student \
     --test_data /path/to/test
 
 # Evaluate NAFNet
 python Nafnet/evaluate_nafnet.py \
-    --model_path runs/final/student/student_Es.pt \
+    --model_path runs/final/student \
     --test_data /path/to/test
 ```
 
@@ -283,40 +274,5 @@ Our training uses a novel teacher-student framework:
 4. **Dose Agnostic**: Student works across all dose levels
 
 ---
-
-## 📄 Citation
-
-If you use this project in your research, please cite:
-
-```bibtex
-@project{anatomy_aware_ct_denoising,
-  title={Anatomy-Aware CT Scan Denoising},
-  author={Ajay},
-  year={2025}
-}
-```
-
----
-
-## 📞 Contact & Support
-
-For questions, issues, or suggestions:
-- 📧 Email: [Your email]
-- 🐛 Issues: [GitHub Issues](https://github.com/Ajay02423/Anatomy-aware-CT-scan-denoising/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/Ajay02423/Anatomy-aware-CT-scan-denoising/discussions)
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-<div align="center">
-
-**Made with ❤️ for advancing medical imaging technology**
-
-*Stars and forks are appreciated!* ⭐
 
 </div>
